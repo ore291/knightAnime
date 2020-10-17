@@ -1,6 +1,6 @@
 <template>
   <div>   
-      <form @submit.prevent='searchAnime'>
+      
         <header >
             <router-link to="/">
             <div class="brand">
@@ -8,10 +8,12 @@
                 alt="logo" class="brand-img">
               <h2>knight anime</h2>
             </div>
-            </router-link>  
+            </router-link> 
+            <form @submit.prevent='searchAnime'> 
             <input v-model="searchText"  class="anime-search"  type="search" placeholder="search....">
+            </form>
         </header>
-      </form>
+      
 
       <div class="Tanime" v-if="!loaded">
         <h1  >Trending Animes</h1>
