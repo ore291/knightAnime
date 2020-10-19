@@ -39,8 +39,9 @@ export default {
     methods: {
        searchAnime(){
            this.$store.dispatch('animes/searchAnime',this.searchText);
-            this.searchText = '';
-            this.$router.replace('searched')
+           this.$store.commit('animes/resetAnimes')
+           this.searchText = '';
+           this.$router.push({name: 'searched'})
         }
     },
    

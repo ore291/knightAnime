@@ -16,18 +16,23 @@
         </div>
         <div class="anime-overview">
           <h3>Synopsis:</h3>
-          <p>{{ anime.attributes.synopsis }}</p>
+          <p>
+            {{ anime.attributes.synopsis| truncate(350)}}
+            <button @click="animeRoute(anime.id, anime.attributes.slug)">read more</button>
+          </p>
+          
         </div>
+        
       </div>
       
     </div>
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+    <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
 
 <script>
 import api from "../api";
-import {mapGetters} from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 import fanimes from '../seed'
 
 export default {
@@ -35,8 +40,11 @@ export default {
 
   data() {
     return {
-      page: `/anime?page[limit]=20&page[offset]=0`,
-      fanimes: fanimes
+      fanimes: fanimes,
+      ...mapState({
+        infiniteId: 'animes/infiniteId'
+      })
+      
     };
   },
   methods: {
@@ -50,16 +58,31 @@ export default {
       }
     },
     infiniteHandler($state) {
-      api.get(this.page).then(({ data }) => {
+      api.get(this.$store.state.animes.page).then(({ data }) => {
         console.log(data);
         if (data.data.length) {
-          this.page = data.links.next;
+          this.$store.commit('animes/setPage', data.links.next);
           this.$store.dispatch('animes/addToAnimes', data.data);
           $state.loaded();
         } else {
           $state.complete();
         }
       }).catch(err => console.log(err))
+    },
+    async animeRoute(id, animeName){
+      try {
+        this.$store.commit('animes/loading')
+        const res = await api.get(`anime/${id}`);
+        this.$router.push({name: 'anime', params: {
+        id:animeName,
+        data: res.data.data.attributes
+        }});
+        this.$store.commit('animes/loading')
+        this.$store.commit('animes/resetAnimes')
+      } catch (error) {
+        console.log(error)
+      }
+      
     },
   },
   // end of methods

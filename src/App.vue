@@ -1,24 +1,23 @@
 <template>
-  <div id="app">
-    
+  <div id="app">  
     <Header/>  
-      <div class="loading" v-if="loading">
-        <div class="lds-spinner">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+    <div class="loading" v-if="loading">
+      <div class="lds-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-      <router-view></router-view> 
+    </div>
+    <router-view v-else></router-view> 
   </div>
 </template>
 

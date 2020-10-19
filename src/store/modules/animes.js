@@ -4,7 +4,9 @@ const state = {
   animes: [],
   tanimes: null,
   loading: false,
-  sanimes: null
+  sanimes: null,
+  infiniteId: +new Date(),
+  page: `/anime?page[limit]=20&page[offset]=0`,
 }
 
 const getters = {
@@ -66,7 +68,16 @@ const mutations = {
   },
   searchedAnimes(state, sanimes){
     state.sanimes = sanimes
+  },
+  resetAnimes(state){
+    state.animes = [],
+    state.infiniteId += 1,
+    state.page = `/anime?page[limit]=20&page[offset]=0`
+  },
+  setPage(state, page){
+    state.page = page
   }
+
     
 }
 
