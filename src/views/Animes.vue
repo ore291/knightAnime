@@ -73,12 +73,14 @@ export default {
       try {
         this.$store.commit('animes/loading')
         const res = await api.get(`anime/${id}`);
+        this.$store.commit('animes/animePage', res.data.data.attributes)
         this.$router.push({name: 'anime', params: {
-        id:animeName,
-        data: res.data.data.attributes
+        id:animeName 
         }});
+        
         this.$store.commit('animes/loading')
         this.$store.commit('animes/resetAnimes')
+        // this.$store.commit('animes/hideTrending')
       } catch (error) {
         console.log(error)
       }
@@ -91,6 +93,7 @@ export default {
       animes: 'animes/animes'
     })
   },
+    
 };
 </script>
 

@@ -1,6 +1,8 @@
 import api from '../../api'
 
 const state = {
+  trendingPage: true,
+  anime: null,
   animes: [],
   tanimes: null,
   loading: false,
@@ -21,6 +23,12 @@ const getters = {
   },
   sanimes: state => {
     return state.sanimes
+  },
+  anime: state => {
+    return state.anime
+  },
+  trendingPage: state => {
+    return state.trendingPage
   }
 }
 
@@ -76,6 +84,15 @@ const mutations = {
   },
   setPage(state, page){
     state.page = page
+  },
+  animePage(state, anime){
+    state.anime = anime
+  },
+  hideTrending(state){
+    state.trendingPage = false
+  },
+  showTrending(state){
+    state.trendingPage = true
   }
 
     

@@ -97,7 +97,7 @@ header h2{
 }
 
 .owl-carousel .owl-item img{
-  max-height: 300px;
+  max-height: 400px;
 }
 /* header end */
 
@@ -362,19 +362,42 @@ header h2{
 
 /* end search animed */
 
-/* single anime section */
+/* new anime section */
 
-.anime-grid{
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: auto auto ;
-  grid-gap: 10px;
+.anime-page{
+  margin-top: 80px;
+  justify-content: space-around;
+  align-items: center;
+}
+.anime-poster{
+  margin-top: -140px;
+  margin-left: 30px;
+  border: solid 3px white;
+  max-width: 80%;
+  max-height: 90%;
+}
+.anime-page-info {
+  padding: 10px;
+}
+.anime-page-info p{
+  line-height: 1.75;
+  margin: 1em 0;
 }
 
-.anime-grid div{
+.anime-page-extra{
   padding: 30px;
-  border: 10px red solid;
 }
 
-
-/* end of single anime section */
+.anime-page-title{
+    height: inherit;
+    background: inherit;
+    margin-left: 20px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font: 900 10vmin/10vh 'Lemonada', sans-serif;
+    filter: invert(1);
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+}
