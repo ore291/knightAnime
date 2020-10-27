@@ -10,59 +10,64 @@
       <h1 class="anime-page-title">{{anime.canonicalTitle}}</h1>
   </section>
   <section>
-    <div class="pure-u-1 pure-u-md-1-5" >
-      <img :src="anime.posterImage.small" alt="anime.canonicalTitle" class="anime-poster">
+    <div class="pure-u-1 pure-u-md-1-5" > 
+      <div class="pure-g">
+        <div class="pure-u-1-2 pure-u-lg-1 ">
+            <img :src="anime.posterImage.small" alt="anime.canonicalTitle" class="anime-poster ">
+        </div>
+        <div class=" pure-u-1-2 pure-u-lg-1">
+          <star-rating v-model="rating" 
+            :read-only=true 
+            :show-rating=false 
+            :star-size=35
+            class="anime-stars"
+            />
+            <div class="anime-mini-info anime-hidden">
+              <p class="pure-u-1 pure-u-md-1-5">Type: {{anime.showType}}</p>
+              <p class="pure-u-1 pure-u-md-1-5">Episodes: {{anime.episodeCount}}</p>
+              <p class="pure-u-1 pure-u-md-1-5">Started: {{anime.startDate | moment("MMMM YYYY") }}</p>
+              <p class="pure-u-1 pure-u-md-1-5">Rank: #{{anime.ratingRank}}</p>
+              <p class="pure-u-1 pure-u-md-1-5">Status: {{anime.status}}</p>
+            </div>
+        </div>
+      </div> 
+        
     </div>
-     <div class="pure-u-1 pure-u-md-2-5 anime-page-info">
-       <h4>Synopsis:</h4><p>{{anime.description}}</p>
+    <div class="pure-u-1 pure-u-lg-4-5">
+      <div class="pure-g">
+         <div  class="pure-u-1 anime-mini-info  ">
+           <div id="anime-sm-hidden" class="pure-g">
+              <p class="pure-u-1 pure-u-md-1-5 ">Type: {{anime.showType}}</p>
+              <p class="pure-u-1 pure-u-md-1-5 ">Episodes: {{anime.episodeCount}}</p>
+              <p class="pure-u-1 pure-u-md-1-5 ">Started: {{anime.startDate | moment("MMMM YYYY") }}</p>
+              <p class="pure-u-1 pure-u-md-1-5 ">Rank: #{{anime.ratingRank}}</p>
+              <p class="pure-u-1 pure-u-md-1-5 ">Status: {{anime.status}}</p>
+           </div>  
+        </div>
+        <div class="pure-u-1 anime-page-info">
+       <h3>Synopsis:</h3><p>{{anime.description}}</p>
+      </div>
     </div>
-     <div class="pure-u-1 pure-u-md-2-5 anime-page-extra">
-      <iframe width="420" height="315"
-        :src="`https://www.youtube.com/embed/${anime.youtubeVideoId}`">
-      </iframe>
     </div>
   </section>
-
+  <div class="footer">
+    <p>&copy; Copyright 2020 KnightLabs Ltd</p>
+  </div>
 </div>
-  <!-- <div class="anime-page pure-g" >
-    <h1 class="anime-page-title pure-u-1">{{anime.canonicalTitle}}</h1>
-    <section class="pure-u-xl-1-2 pure-u-1 anime-page-info" > 
-    <img :src="anime.posterImage.small" alt="anime.canonicalTitle" class="anime-page-img">
-    <h3 style="margin-bottom:10px">synopsis:</h3>
-    <p>{{anime.description}}</p>
-    </section>
-    <section class="pure-u-xl-1-2 pure-u-1 anime-page-right">
-      <div class="pure-g">
-      <div class="pure-u-1">
-        <img class="anime-page-cover" :src="animeCoverImg" alt="" srcset="">
-      </div>
-      <div class="pure-u-1">
-        <div class="pure-g">
-          <div class="pure-u-1-3 pure-u-md-1-5 button-success">Episodes: {{anime.episodeCount}}</div>
-          <div class="pure-u-1-3 pure-u-md-2-5">started: {{anime.startDate}}</div>
-          <div class="pure-u-1-3 pure-u-md-1-5">rank: {{anime.ratingRank}}</div>
-          <div class="pure-u-1-3 pure-u-md-1-5">4</div>
-          <div class="pure-u-1 pure-u-md-1"><iframe width="420" height="315"
-            :src="`https://www.youtube.com/embed/${anime.youtubeVideoId}`">
-          </iframe></div>
-        </div>
-      </div>
-      </div>
-      
-      
-    </section>     
-  </div> -->
 </template>
 
 <script>
-import fanime from '../seed'
 import {mapGetters} from 'vuex';
+import StarRating from 'vue-star-rating'
 export default {
   name: "anime",
   data() {
     return {
-      fanime: fanime[0].attributes
+      
     };
+  },
+  components: {
+    StarRating
   },
   // created() {
   //   this.anime = this.$route.params.data;
@@ -75,7 +80,21 @@ export default {
       }else{
         return this.anime.coverImage.original
       }
-    }
+    },
+    rating() {
+      const rat = this.anime.averageRating;
+      if (rat > 80) {
+        return 5;
+      } else if (rat > 65) {
+        return 4;
+      } else if (rat > 45){
+        return 3
+      } else if(rat > 25){
+        return 2
+      }else {
+        return 1 ;
+      }
+    },
   },
   
 };

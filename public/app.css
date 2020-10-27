@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lemonada:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:wght@300&family=Roboto+Mono:ital@1&display=swap');
 
 body{
     font-family: 'montserrat', 'poppins','san-serif';
@@ -6,6 +6,7 @@ body{
     flex-direction: column;
     background-color: #22254b;
     color: white;
+    overflow-y: auto;
     
 }
 * {
@@ -53,19 +54,6 @@ header{
   
 }
 
-/* .nav-links li{
-  display: inline-block;
-  padding: 0px 20px;
-}
-
-.nav-links li a{
-  transition: all 0.3s ease 0s;
-}
-
-.nav-links li a:hover{
-  color: #008898;
-} */
-
 header h2{
   text-transform: uppercase;
   text-decoration: none;
@@ -90,6 +78,7 @@ header h2{
 
 }
 .Tanime h1{
+  font-family: 'montserrat';
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
@@ -360,28 +349,27 @@ header h2{
   
 }
 
-/* end search animed */
+/* end search animes */
 
 /* new anime section */
 
 .anime-page{
-  margin-top: 80px;
-  justify-content: space-around;
+  margin: 73px 0px 0px 0px;
+  justify-content: space-between;
   align-items: center;
 }
 .anime-poster{
-  margin-top: -140px;
-  margin-left: 30px;
-  border: solid 3px white;
-  max-width: 80%;
-  max-height: 90%;
+  border: solid 3px burlywood;
 }
 .anime-page-info {
-  padding: 10px;
+  padding: 30px;
 }
 .anime-page-info p{
   line-height: 1.75;
-  margin: 1em 0;
+  margin: 1rem .5em;
+  font-family: 'Poppins', sans-serif;
+  font-size: large;
+  
 }
 
 .anime-page-extra{
@@ -395,9 +383,95 @@ header h2{
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font: 900 10vmin/10vh 'Lemonada', sans-serif;
+    font: 900 12vmin/12vh 'Roboto Mono', sans-serif;
     filter: invert(1);
     display: flex;
     justify-content: left;
     align-items: flex-start;
 }
+
+.cover-img{
+  border-bottom: 3px solid burlywood;
+}
+
+.footer{
+	position: fixed;
+  bottom: 0;
+  letter-spacing: normal;
+  background-color:  #403a53;
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+  padding: 5px 0px 5px 0px;
+}
+
+.anime-mini-info{
+  margin: 20px 8px 0px 25px;
+  cursor: pointer;
+}
+.anime-mini-info p{
+    padding: 10px 5px 10px 5px;
+    border-bottom: 3px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    box-shadow: 0 8px 6px -6px black;
+    text-align: center;
+    justify-content: center;
+    font-weight: 700; 
+    color: burlywood;
+    text-transform: capitalize;
+    
+
+}
+
+
+.anime-stars{
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+/* anime page responsive */
+@media (max-height:800px){
+	.footer { position: static; }
+}
+@media screen and (max-width: 768px){
+  .anime-poster{
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: solid 3px burlywood;
+    max-width: 100%;
+    max-height: 90%;
+  }
+
+  .anime-mini-info{
+    padding: 3px;
+  }
+  
+}
+
+@media screen and (min-width:769px){
+  .anime-poster{
+    margin-top: -100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: solid 3px burlywood;
+    max-width: 105%;
+    max-height: 110%;
+  }
+  .anime-hidden{
+    display: none;
+  }
+}
+
+@media (max-width: 767px){
+  #anime-sm-hidden{
+    display: none;
+  }
+  .anime-page-info p{
+    line-height: 1.75;
+    font-size: small;
+  }
+}
+/* anime page responsive ending */

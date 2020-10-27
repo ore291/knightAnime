@@ -8,6 +8,7 @@ var VueTruncate = require('vue-truncate-filter')
 
 Vue.use(InfiniteLoading);
 Vue.use(VueTruncate)
+Vue.use(require('vue-moment'));
 
 
 
