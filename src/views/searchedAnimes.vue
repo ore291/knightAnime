@@ -17,7 +17,8 @@
             </div>
             <div class="anime-overview">
             <h3>Synopsis:</h3>
-            <p>{{ anime.attributes.synopsis }}</p>
+            <p>{{ anime.attributes.synopsis| truncate(200)}}</p>
+            <button @click="animeRoute(anime.id, anime.attributes.slug)">read more</button>
             </div>
         </div>
     </div>
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import api from "../api";
 import {mapGetters} from 'vuex'
 export default {
     computed: {
@@ -41,7 +43,22 @@ export default {
             } else {
                 return "green";
             }
-            },
+        },
+        async animeRoute(id, animeName){
+        try {
+            this.$store.commit('animes/loading')
+            const res = await api.get(`anime/${id}`);
+            this.$store.commit('animes/animePage', res.data.data.attributes)
+            this.$router.push({name: 'anime', params: {
+            id:animeName 
+            }});
+            this.$store.commit('animes/loading')
+            this.$store.commit('animes/resetAnimes')
+        } catch (error) {
+            console.log(error)
+        }
+        
+    },
     },
 }
 </script>

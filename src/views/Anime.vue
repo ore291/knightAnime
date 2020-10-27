@@ -10,24 +10,24 @@
       <h1 class="anime-page-title">{{anime.canonicalTitle}}</h1>
   </section>
   <section>
-    <div class="pure-u-1 pure-u-md-1-5" > 
+    <div class="pure-u-1 pure-u-lg-1-5" > 
       <div class="pure-g">
-        <div class="pure-u-1-2 pure-u-lg-1 ">
+        <div class="pure-u-1-2 pure-u-md-2-5 pure-u-lg-1 ">
             <img :src="anime.posterImage.small" alt="anime.canonicalTitle" class="anime-poster ">
         </div>
-        <div class=" pure-u-1-2 pure-u-lg-1">
+        <div class=" pure-u-1-2 pure-u-md-3-5 pure-u-lg-1 anime-stars-div">
           <star-rating v-model="rating" 
             :read-only=true 
             :show-rating=false 
-            :star-size=35
+            :star-size=30
             class="anime-stars"
             />
             <div class="anime-mini-info anime-hidden">
-              <p class="pure-u-1 pure-u-md-1-5">Type: {{anime.showType}}</p>
-              <p class="pure-u-1 pure-u-md-1-5">Episodes: {{anime.episodeCount}}</p>
-              <p class="pure-u-1 pure-u-md-1-5">Started: {{anime.startDate | moment("MMMM YYYY") }}</p>
-              <p class="pure-u-1 pure-u-md-1-5">Rank: #{{anime.ratingRank}}</p>
-              <p class="pure-u-1 pure-u-md-1-5">Status: {{anime.status}}</p>
+              <p class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-5">Type: {{anime.showType}}</p>
+              <p class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-5">Episodes: {{anime.episodeCount}}</p>
+              <p class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-5">Started: {{anime.startDate | moment("MMMM YYYY") }}</p>
+              <p class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-5">Rank: #{{anime.ratingRank}}</p>
+              <p class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-5">Status: {{anime.status}}</p>
             </div>
         </div>
       </div> 
