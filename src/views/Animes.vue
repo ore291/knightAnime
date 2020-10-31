@@ -1,31 +1,27 @@
 <template>
   <div>
-    <div class="anime-container">
-      <div class="anime" v-for="anime in animes" :key="anime.id">
-        <img
-          class="anime-img"
-          :src="anime.attributes.posterImage.small"
-          :alt="anime.attributes.canonicalTitle"
-        />
-        <div class="anime-info">
-          <h4>{{ anime.attributes.canonicalTitle }}</h4>
-          <span
-            :class="['animeRating', setRating(anime.attributes.averageRating)]"
-            >{{ anime.attributes.averageRating }}</span
-          >
-        </div>
-        <div class="anime-overview">
-          <h3>Synopsis:</h3>
-          <p>
-            {{ anime.attributes.synopsis| truncate(200)}}
-            <button @click="animeRoute(anime.id, anime.attributes.slug)">read more</button>
-          </p>
-          
-        </div>
-        
-      </div>
-      
-    </div>
+    <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item ">
+          <!-- pure-menu-selected -->
+          <router-link to="/" class="pure-menu-link">All Animes</router-link>
+        </li>
+        <li class="pure-menu-item">
+          <router-link to="/trending" class="pure-menu-link">Trending Animes</router-link>
+        </li>
+        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            <a href="#" id="menuLink1" class="pure-menu-link">Sort By Genres</a>
+            <ul  class="pure-menu-children">
+              <div v-for="category in categories" :key='category.title'>
+                <li class="pure-menu-item">
+                    <a @click="getCategories(category.title)" href="#" class="pure-menu-link">{{category.title}}</a>
+                </li>
+              </div>  
+            </ul>
+        </li>
+    </ul>
+</div>
+    <container :animes='animes' />
     <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler"></infinite-loading>
   </div>
 </template>
@@ -33,30 +29,23 @@
 <script>
 import api from "../api";
 import {mapGetters, mapState} from 'vuex'
-import fanimes from '../seed'
+import container from '../components/Container'
 
 export default {
   name: "Animes",
-
+  components: {container},
   data() {
     return {
-      fanimes: fanimes,
       ...mapState({
         infiniteId: 'animes/infiniteId'
-      })
+      }),
+      show: false,
+      hover: true,
+    
       
     };
   },
   methods: {
-    setRating(rating) {
-      if (rating < 70) {
-        return "red";
-      } else if (rating < 80) {
-        return "yellow";
-      } else {
-        return "green";
-      }
-    },
     infiniteHandler($state) {
       api.get(this.$store.state.animes.page).then(({ data }) => {
         console.log(data);
@@ -69,28 +58,16 @@ export default {
         }
       }).catch(err => console.log(err))
     },
-    async animeRoute(id, animeName){
-      try {
-        this.$store.commit('animes/loading')
-        const res = await api.get(`anime/${id}`);
-        this.$store.commit('animes/animePage', res.data.data.attributes)
-        this.$router.push({name: 'anime', params: {
-        id:animeName 
-        }});
-        
-        this.$store.commit('animes/loading')
-        this.$store.commit('animes/resetAnimes')
-        // this.$store.commit('animes/hideTrending')
-      } catch (error) {
-        console.log(error)
-      }
-      
-    },
+    getCategories(title){
+      this.$store.commit('animes/setCname', title);
+      this.$router.push({name: 'category'})
+    }
   },
   // end of methods
   computed: {
     ...mapGetters({
-      animes: 'animes/animes'
+      animes: 'animes/animes',
+      categories: 'animes/categories'
     })
   },
     

@@ -44,8 +44,9 @@ header{
     
 }
 .brand{
-  display: inline-flex;
-  align-items: center;
+ display: inline-flex;
+ align-items: center;
+ justify-content: space-between;
 }
 .brand-img{
   cursor: pointer;
@@ -64,12 +65,10 @@ header h2{
     border-radius: 50px;
     color: black;
     font-family: inherit;
-    font-size: 1,2rem;
+    font-size: 1.2rem;
     border: none;
     transition: all 0.3s ease 0s;
     margin-left: auto;
-    
-
 }
 .Tanime{
   z-index: 2;
@@ -77,8 +76,8 @@ header h2{
   padding: 10px 5px;
 
 }
-.Tanime h1{
-  font-family: 'montserrat';
+#containercon h1{
+  font-family: 'lemonada';
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
@@ -100,7 +99,9 @@ header h2{
     justify-content: center;
    
 }
-
+#containercon{
+  margin-top: 70px;
+}
 .anime-img{
     max-width: 100%;
     max-height: 90%;

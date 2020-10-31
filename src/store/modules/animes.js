@@ -9,9 +9,20 @@ const state = {
   sanimes: null,
   infiniteId: +new Date(),
   page: `/anime?page[limit]=20&page[offset]=0`,
+  categoriesList: null
 }
 
 const getters = {
+  categories({categoriesList}){
+    return categoriesList.map(
+      a => {
+        return {
+          title: a.attributes.title,
+          slug: a.attributes.slug
+        }
+      }
+    )
+  },
   animes: state => {
     return state.animes
   },
@@ -51,7 +62,7 @@ const actions = {
       try {
         commit('loading')
         const res = await api.get(
-          `/anime?page[limit]=20&page[offset]=0&filter[text]=` + anime
+          `/anime?page[limit]=20&page[offset]=0&filter[text]=${anime}`  
         );
         commit('searchedAnimes', res.data.data)
         commit('loading')
@@ -59,6 +70,14 @@ const actions = {
         console.log(error);
       }
     },
+    async getCategories({commit}){
+      try {
+        const res = await api.get(`/categories?sort=-totalMediaCount`);
+        commit('setCategories', res.data.data)
+      } catch (error) {
+         console.log(error)
+      }
+    }
 
 
    
@@ -93,6 +112,12 @@ const mutations = {
   },
   showTrending(state){
     state.trendingPage = true
+  },
+  setCategories(state, categories){
+    state.categoriesList = categories
+  },
+  setCname(state, title){
+    state.cname = title;
   }
 
     

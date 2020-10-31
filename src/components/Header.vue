@@ -1,24 +1,22 @@
 <template>
-  <div>   
-      
-        <header >
-            <router-link to="/">
-            <div class="brand">
-              <img src="../assets/logo.png" 
-                alt="logo" class="brand-img">
-              <h2>knight anime</h2>
-            </div>
-            </router-link>
-            <form @submit.prevent='searchAnime'> 
-            <input v-model="searchText"  class="anime-search"  type="search" placeholder="search....">
-            </form>
-        </header>
+  <div>      
+    <header >
+        <router-link to="/">
+        <div class="brand">
+            <img src="../assets/logo.png" 
+            alt="logo" class="brand-img">
+            <h2>knight anime</h2>
+        </div>
+        </router-link>
+        <form @submit.prevent='searchAnime'> 
+        <input v-model="searchText"  class="anime-search"  type="search" placeholder="search....">
+        </form>
+    </header>
   </div>
+  
 </template>
 
 <script>
-
-
 
 export default {
     data() {
@@ -34,7 +32,6 @@ export default {
            this.$router.push({name: 'searched'})
         }
     },
-   
  
 }
 </script>

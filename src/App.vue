@@ -31,7 +31,8 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
   name: "App",
   mounted() {
-   this.trending();  
+   this.trending();
+   this.categories();
   },
   components: {
     Header,
@@ -45,7 +46,8 @@ export default {
   },
   methods: { 
    ...mapActions({
-     trending: 'animes/getTrendingAnimes'
+     trending: 'animes/getTrendingAnimes',
+     categories: 'animes/getCategories'
    }),
     
   },
@@ -58,10 +60,10 @@ export default {
    watch: {
    $route: function() {
     // Check if given route is true, if it is then hide Nav. 
-    if (this.$route.name === "anime" || this.$route.name === "searched") {
-        this.$store.commit('animes/hideTrending');
-        } else  {
+    if (this.$route.name === "home") {
         this.$store.commit('animes/showTrending');
+        } else  {
+        this.$store.commit('animes/hideTrending');
     }
   }
 },
