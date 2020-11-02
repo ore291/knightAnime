@@ -534,3 +534,16 @@ header h2{
 }
 /* end of transistion section */
 
+.anime-overview button {
+  background-color: #5fbd62;
+  border: none;
+  color: white;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
