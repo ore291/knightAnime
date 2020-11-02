@@ -23,7 +23,7 @@
         </p>
       </div>
     </div>
-    <back-to-top text="&#8592;"></back-to-top>
+    <back-to-top text="Top"></back-to-top>
   </div>
 </template>
 

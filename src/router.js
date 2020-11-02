@@ -3,8 +3,9 @@ import VueRouter from 'vue-router'
 import animes from "./views/Animes";
 import sanimes from "./views/searchedAnimes";
 import anime from "./views/Anime";
-import tanimes from "./views/trendingAnimes"
-import canimes from "./views/Category"
+import tanimes from "./views/trendingAnimes";
+import canimes from "./views/Category";
+import NotFound from './views/NotFound';
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ export default new VueRouter({
         path: '/genre/:genre',
         name: 'category',
         component: canimes
+      },
+      {
+        path: '*',
+        name: 'Not Found',
+        component: NotFound
       }
     ]
     })
