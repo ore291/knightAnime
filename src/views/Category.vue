@@ -1,34 +1,54 @@
 <template>
   <div>
-      <container :animes='canimes' />
-      <infinite-loading :identifier="infiniteId" @infinite="infiniteHandler"></infinite-loading>
+    <h1 class="catTextHeader">{{ $route.params.data }} Animes</h1>
+
+    <container :animes="canimes" />
+    <infinite-loading
+      :identifier="infiniteId"
+      @infinite="infiniteHandler"
+      spinner="waveDots"
+    ></infinite-loading>
   </div>
 </template>
 
 <script>
-import container from '../components/Container'
-import api from '../api'
+import { mapGetters, mapState } from "vuex";
+import container from "../components/Container";
+import api from "../api";
 export default {
-    components: {
-        container
-    },
-    methods: {
+  data() {
+    return {
+      ...mapState({
+        infiniteId: "animes/infiniteId",
+      }),
+    };
+  },
+  components: {
+    container,
+  },
+  methods: {
     infiniteHandler($state) {
-      api.get(this.$store.state.animes.cpage).then(({ data }) => {
-        console.log(data);
-        if (data.data.length) {
-          this.$store.commit('animes/setPage', data.links.next);
-          this.$store.dispatch('animes/addToAnimes', data.data);
-          $state.loaded();
-        } else {
-          $state.complete();
-        }
-      }).catch(err => console.log(err))
+      api
+        .get(this.$store.state.animes.cname)
+        .then(({ data }) => {
+          if (data.data.length) {
+            this.$store.commit("animes/setCategoryPage", data.links.next);
+            this.$store.commit("animes/addToCategories", data.data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch((err) => console.log(err));
     },
   },
-}
+  computed: {
+    ...mapGetters({
+      canimes: "animes/canimes",
+    }),
+  },
+};
 </script>
 
 <style>
-
 </style>

@@ -430,6 +430,12 @@ header h2{
   margin-top: 5px;
 }
 
+.catTextHeader{
+  margin-top: 73px;
+  text-align: center;
+}
+
+
 /* anime page responsive */
 @media (max-height:800px){
 	.footer { position: static; }
@@ -500,10 +506,31 @@ header h2{
 }
 }
 
-@media (max-width: 414px){
+@media screen and (max-width: 414px){
   .anime-page{
-    margin: 43px 0px 0px 0px;
-    
+    margin: 43px 0px 0px 0px; 
   }
+  #genre {
+    white-space: normal;
+    text-align: center;
+}
 }
 /* anime page responsive ending */
+
+/* page transistion section */
+.sakura-enter, .sakura-leave-to {
+  opacity: 0;
+  transform: translateX(2em);
+}
+.sakura-enter-active, .sakura-leave-active{
+  transition: all .3s ease;
+}
+.sake-enter-active, .sake-leave-active {
+  transition: all .1s ease;
+}
+
+.sake-enter, .sake-leave-to {
+  opacity: 0;
+}
+/* end of transistion section */
+

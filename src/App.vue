@@ -18,7 +18,10 @@
         <div></div>
       </div>
     </div>
-    <router-view v-else-if="!loading"></router-view> 
+    <transition :name="transitionName" mode="out-in">
+      <router-view v-if="!loading"></router-view> 
+    </transition>
+    
   </div>
 </template>
 
@@ -41,7 +44,8 @@ export default {
   data() {
     return {
       searchedAnimes: null,
-      trendingAnimes: null
+      trendingAnimes: null,
+      transitionName: null 
     };
   },
   methods: { 
@@ -58,18 +62,26 @@ export default {
       })
   },
    watch: {
-   $route: function() {
+   $route: function(to, from) {
     // Check if given route is true, if it is then hide Nav. 
     if (this.$route.name === "home") {
         this.$store.commit('animes/showTrending');
         } else  {
         this.$store.commit('animes/hideTrending');
     }
-  }
-},
+    if (from.path === '/') {
+        this.transitionName = 'sakura';
+      } else {
+        this.transitionName = 'sake';
+      }
+    }
+
+  }, 
   
 };
 </script>
 
 <style >
+
+
 </style>

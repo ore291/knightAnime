@@ -32,7 +32,7 @@ export default new VueRouter({
         component: tanimes
       },
       {
-        path: '/anime/:category',
+        path: '/genre/:genre',
         name: 'category',
         component: canimes
       }
