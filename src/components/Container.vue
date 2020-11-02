@@ -15,10 +15,11 @@
       </div>
       <div class="anime-overview">
         <h3>Synopsis:</h3>
-        <p>{{ anime.attributes.synopsis | truncate(200) }}</p>
-        <button  @click="animeRoute(anime.id, anime.attributes.slug)">
-          read more
-        </button>
+          <p>{{ anime.attributes.synopsis | truncate(200) }}
+             <button @click="animeRoute(anime.id, anime.attributes.slug)">
+              read more
+            </button>
+          </p>   
       </div>
     </div>
   </div>
